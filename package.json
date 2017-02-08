@@ -1,6 +1,6 @@
 {
   "name": "matterhorn",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "matterhorn",
   "engines": {
     "node": "6.9.5",
