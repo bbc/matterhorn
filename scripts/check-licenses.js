@@ -1,6 +1,15 @@
 const licenses = require('../licences.json');
+const colors = require('colors/safe');
 const pp = (json) => JSON.stringify(json, null, 2);
 const NL = '\n';
+
+function ppLicensed(items) {
+  return colors.green(pp(items));
+}
+
+function ppExceptions(items) {
+  return colors.blue(pp(items));
+}
 
 // This is a list of acceptable licenses;
 // Entries may need to be comma separated, e.g. "MIT,Apache2"
@@ -62,9 +71,9 @@ Object.keys(licenses).forEach((key) => {
   }
 });
 
-console.log('Acceptable Projects', pp(licensed), NL);
+console.log('Acceptable Projects', ppLicensed(licensed), NL);
 
-console.log('Acceptable Exceptions', pp(exceptions), NL);
+console.log('Acceptable Exceptions', ppExceptions(exceptions), NL);
 
 if (problems.length > 0) {
   console.log('Problems with the licenses for these dependencies:', pp(problems), NL);

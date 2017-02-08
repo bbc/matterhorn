@@ -122,6 +122,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "colors": "^1.1.2",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-jasmine": "^2.2.0",
