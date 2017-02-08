@@ -1,6 +1,6 @@
 {
-  "name": "taf-service-matterhorn",
-  "version": "0.10.0",
+  "name": "matterhorn",
+  "version": "0.12.1",
   "description": "matterhorn",
   "engines": {
     "node": "6.9.5",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bbc/taf-service-matterhorn.git"
+    "url": "https://github.com/bbc/matterhorn.git"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/bbc/taf-service-matterhorn",
+  "homepage": "https://github.com/bbc/matterhorn",
   "bugs": {
-    "url": "https://github.com/bbc/taf-service-matterhorn/issues"
+    "url": "https://github.com/bbc/matterhorn/issues"
   },
   "scripts": {
     "lint:src": "eslint src",
@@ -26,13 +26,13 @@
     "test:integration": "node test/runners/integration.js",
     "postversion": "git push origin master && git push --tags origin master",
     "prerelease": "VERSION=`node -e \"console.log(require('./package.json').version)\"` && speculate --release $VERSION && mbt -s mock -r 7 -v $VERSION",
-    "release": "VERSION=`node -e \"console.log(require('./package.json').version)\"` && cosmos-release service taf-service-matterhorn ./RPMS/*.rpm --os=centos7 --release-version=$VERSION",
+    "release": "VERSION=`node -e \"console.log(require('./package.json').version)\"` && cosmos-release service matterhorn ./RPMS/*.rpm --os=centos7 --release-version=$VERSION",
     "postrelease": "echo VERSION=v`node -e \"console.log(require('./package.json').version)\"` > $WORKSPACE/properties.json; echo ENVIRONMENT=test >> $WORKSPACE/properties.json",
-    "jenkins:create": "node pipeline/scripts/jenkins-create-job.js --name taf-service-matterhorn --client-cert $CLIENT_CERT --ca-cert $CA_CERT",
-    "sumo:log-deploy": "node pipeline/scripts/sumo-log-deployment.js --name taf-service-matterhorn",
-    "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name taf-service-matterhorn --client-cert $COSMOS_CERT",
-    "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack taf-service-matterhorn",
-    "cosmos:deploy": "cd pipeline; cosmos-deploy deploy taf-service-matterhorn",
+    "jenkins:create": "node pipeline/scripts/jenkins-create-job.js --name matterhorn --client-cert $CLIENT_CERT --ca-cert $CA_CERT",
+    "sumo:log-deploy": "node pipeline/scripts/sumo-log-deployment.js --name matterhorn",
+    "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name matterhorn --client-cert $COSMOS_CERT",
+    "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack matterhorn",
+    "cosmos:deploy": "cd pipeline; cosmos-deploy deploy matterhorn",
     "check-licenses": "license-checker --json --out licences.json && node scripts/check-licenses.js",
     "help": "npm-help"
   },
@@ -91,7 +91,7 @@
   },
   "spec": {
     "post": [
-      "mv /usr/lib/taf-service-matterhorn/pipeline/bake-scripts /etc/bake-scripts/taf-service-matterhorn"
+      "mv /usr/lib/matterhorn/pipeline/bake-scripts /etc/bake-scripts/matterhorn"
     ],
     "executable": [
       "./pipeline/bake-scripts/*"
@@ -102,7 +102,7 @@
       "cosmos-ca-tools"
     ],
     "environment": {
-      "LOG_PATH": "/var/log/taf-service-matterhorn",
+      "LOG_PATH": "/var/log/matterhorn",
       "ENVIRONMENT": "{{environment}}",
       "CLIENT_CERT": "/etc/pki/tls/private/client_crt_key.pem",
       "CA_CERT": "/etc/pki/tls/certs/client.crt"
