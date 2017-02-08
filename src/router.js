@@ -13,7 +13,7 @@ router.use(cors())
 router.use(morgan('short', { stream: logger.stream }))
 
 router.get('/status', (req, res) => {
-  res.send('taf-service-matterhorn is working fine')
+  res.send('matterhorn is working fine')
 })
 
 router.get('/version', (req, res) => {
