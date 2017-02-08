@@ -1,0 +1,139 @@
+{
+  "name": "taf-service-matterhorn",
+  "version": "0.10.0",
+  "description": "matterhorn",
+  "engines": {
+    "node": "6.9.5",
+    "npm": "3.10.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbc/taf-service-matterhorn.git"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bbc/taf-service-matterhorn",
+  "bugs": {
+    "url": "https://github.com/bbc/taf-service-matterhorn/issues"
+  },
+  "scripts": {
+    "lint:src": "eslint src",
+    "lint:test": "eslint test",
+    "start": "node server",
+    "watch": "nodemon server.js",
+    "pretest": "npm run lint:src",
+    "test": "npm run test:spec && npm run test:integration",
+    "test:spec": "node test/runners/spec.js",
+    "test:integration": "node test/runners/integration.js",
+    "postversion": "git push origin master && git push --tags origin master",
+    "prerelease": "VERSION=`node -e \"console.log(require('./package.json').version)\"` && speculate --release $VERSION && mbt -s mock -r 7 -v $VERSION",
+    "release": "VERSION=`node -e \"console.log(require('./package.json').version)\"` && cosmos-release service taf-service-matterhorn ./RPMS/*.rpm --os=centos7 --release-version=$VERSION",
+    "postrelease": "echo VERSION=v`node -e \"console.log(require('./package.json').version)\"` > $WORKSPACE/properties.json; echo ENVIRONMENT=test >> $WORKSPACE/properties.json",
+    "jenkins:create": "node pipeline/scripts/jenkins-create-job.js --name taf-service-matterhorn --client-cert $CLIENT_CERT --ca-cert $CA_CERT",
+    "sumo:log-deploy": "node pipeline/scripts/sumo-log-deployment.js --name taf-service-matterhorn",
+    "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name taf-service-matterhorn --client-cert $COSMOS_CERT",
+    "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack taf-service-matterhorn",
+    "cosmos:deploy": "cd pipeline; cosmos-deploy deploy taf-service-matterhorn",
+    "help": "npm-help"
+  },
+  "scriptHelp": {
+    "lint": {
+      "usage": [
+        "$0:src",
+        "$0:test"
+      ],
+      "desc": "Runs the linting tests against 'src' and 'test' respectively"
+    },
+    "test": {
+      "usage": [
+        "VERBOSE=true $0",
+        "DEBUG=true $0",
+        "$0",
+        "$0:spec"
+      ],
+      "desc": "Runs the tests - You can enable debugging or verbose output using 'VERBOSE=true' & 'DEBUG=true'"
+    },
+    "start": {
+      "desc": "Starts the service using Node and 'src/app.js'"
+    },
+    "watch": {
+      "desc": "Starts the service using Nodemon and watches for changes"
+    },
+    "version": {
+      "usage": [
+        "$0 patch -m \"Message\"",
+        "$0 minor -m \"Message\"",
+        "$0 major -m \"Message\""
+      ],
+      "desc": "Create a new semantic tag of the project and push the tag to GitHub"
+    },
+    "release": {
+      "desc": "Create an RPM of the project using Speculate and release it to the Cosmos registry"
+    },
+    "jenkins:create": {
+      "desc": "Create Build and Deploy jobs using the jenkins job configs"
+    },
+    "cosmos:create-stack": {
+      "usage": [
+        "$0 -- int 1.0.0 main",
+        "$0 -- test 1.0.0 dns",
+        "$0 -- live 1.0.0 alarms"
+      ],
+      "desc": "Create the Cosmos stacks defined in infrastrcture on different environments (the version can be anything)"
+    },
+    "cosmos:deploy": {
+      "usage": [
+        "$0 -- int 1.0.0",
+        "$0 -- test 1.0.1"
+      ],
+      "desc": "Release a specific version of the project to an environment"
+    }
+  },
+  "spec": {
+    "post": [
+      "mv /usr/lib/taf-service-matterhorn/pipeline/bake-scripts /etc/bake-scripts/taf-service-matterhorn"
+    ],
+    "executable": [
+      "./pipeline/bake-scripts/*"
+    ],
+    "requires": [
+      "cloudteam-td-agent-setup",
+      "cloud-httpd24-ssl-no-certs",
+      "cosmos-ca-tools"
+    ],
+    "environment": {
+      "LOG_PATH": "/var/log/taf-service-matterhorn",
+      "ENVIRONMENT": "{{environment}}",
+      "CLIENT_CERT": "/etc/pki/tls/private/client_crt_key.pem",
+      "CA_CERT": "/etc/pki/tls/certs/client.crt"
+    }
+  },
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "flashheart": "^2.6.0",
+    "minimist": "^1.2.0",
+    "morgan": "^1.7.0",
+    "request": "^2.79.0",
+    "require-directory": "^2.1.1",
+    "speculate": "^1.6.1",
+    "split": "^1.0.0",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-jasmine": "^2.2.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "jasmine": "^2.5.3",
+    "jasmine-spec-reporter": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "npm-script-help": "^1.0.0",
+    "split-ca": "^1.0.1",
+    "supertest": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
+  }
+}

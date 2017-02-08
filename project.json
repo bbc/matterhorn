@@ -1,0 +1,6 @@
+{
+  "name": "taf-service-matterhorn",
+  "packaging": {
+    "type": "spec"
+  }
+}

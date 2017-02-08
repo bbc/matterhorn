@@ -1,0 +1,14 @@
+{
+  "plugins": [ "jasmine" ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "jasmine": true
+  },
+  "extends": "standard",
+  "globals": {}
+}

@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  "matterhorn":
+    build: .
+    working_dir: /usr/src/app
+    ports:
+      - "7080:8080"
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    volumes:
+      - .:/usr/src/app/
+    command: /bin/bash -c "npm install && npm run watch"
