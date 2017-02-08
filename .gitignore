@@ -20,3 +20,5 @@ SPECS
 SOURCES
 *.service
 
+# License info
+licences.json
