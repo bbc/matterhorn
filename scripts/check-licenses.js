@@ -3,14 +3,6 @@ const colors = require('colors/safe');
 const pp = (json) => JSON.stringify(json, null, 2);
 const NL = '\n';
 
-function ppLicensed(items) {
-  return colors.green(pp(items));
-}
-
-function ppExceptions(items) {
-  return colors.blue(pp(items));
-}
-
 // This is a list of acceptable licenses;
 // Entries may need to be comma separated, e.g. "MIT,Apache2"
 var whitelist = [
@@ -44,9 +36,6 @@ var exceptions = {
   },
   "map-stream@0.1.0": {
     "reason": "MIT License; see: https://github.com/dominictarr/map-stream"
-  },
-  "pm2@2.4.0": {
-    "reason": "A-GPL, but acceptable use as a process runner"
   }
 };
 
@@ -61,24 +50,73 @@ function inExceptionList(key) {
 var licensed = {};
 var problems = [];
 
+var licensedCount = 0;
+var problemCount = 0;
+var exceptionCount = 0;
+
 Object.keys(licenses).forEach((key) => {
   var item = licenses[key];
   licensed[item.licenses] = (licensed[item.licenses] || 0) + 1;
-  if (!inWhitelist(item.licenses + '') && !inExceptionList(key)) {
+  if (inWhitelist(item.licenses + '')) {
+    licensedCount++;
+  } else if (inExceptionList(key)) {
+    exceptionCount++;
+  } else {
     // There's a problem here
     item.key = key;
     problems.push(item);
+    problemCount++;
   }
 });
 
-console.log('Acceptable Projects', ppLicensed(licensed), NL);
+// Formatting and Output
 
-console.log('Acceptable Exceptions', ppExceptions(exceptions), NL);
+function ppLicensed(title, items) {
+  const rows = Object.keys(items).map((item) => {
+    const value = items[item];
+    return colors.green(`  ${item} (${value})`);
+  }).sort();
+  return [title].concat(rows).join(NL);
+}
+
+function ppExceptions(title, items) {
+  const rows = Object.keys(items).map((item) => {
+    const value = items[item];
+    return colors.blue(`  ${item}${NL}    Reason: ${value.reason}`);
+  }).sort();
+  return [title].concat(rows).join(NL);
+}
+
+function ppProblems(title, items) {
+  const rows = items.map((item) => {
+    const value = items[item];
+    return colors.red([
+      `  ${item.key}`,
+      `    License:     ${item.licences}`,
+      `    Repository:  ${item.repository}`,
+      `    Publisher:   ${item.publisher}`,
+      `    Url:         ${item.url}`,
+      ``
+    ].join(NL));
+  }).sort();
+  return [title].concat(rows).join(NL);
+}
+
+console.log(ppLicensed('Acceptable Projects', licensed), NL);
+
+console.log(ppExceptions('Acceptable Exceptions', exceptions), NL);
+
+const summary = [
+  colors.green(`Licensed (${licensedCount})`),
+  colors.blue(`Exceptions (${exceptionCount})`),
+  colors.red(`Problems (${problemCount})`)
+].join(' ');
 
 if (problems.length > 0) {
-  console.log('Problems with the licenses for these dependencies:', pp(problems), NL);
+  console.log(ppProblems('Problems with the licenses for these dependencies:', problems), NL);
+  console.log(colors.green(`Licenses not ok`), summary);
   process.exit(1);
 } else {
-  console.log('All licenses ok');
+  console.log(colors.green(`All licenses ok`), summary);
   process.exit(0);
 }
