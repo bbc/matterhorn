@@ -10,4 +10,4 @@ services:
       - ENVIRONMENT=${ENVIRONMENT}
     volumes:
       - .:/usr/src/app/
-    command: /bin/bash -c "npm install && npm run watch"
+    command: npm run watch
