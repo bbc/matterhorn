@@ -28,6 +28,18 @@ describe('Identify', () => {
       })
     })
   })
+  describe('if given a valid whoami string with URI encoded characters', () => {
+    it('Returns the correct device', (done) => {
+      request.get('/identify/json?whoami=CABECL765%20MHGCAB765%20DSMCAB765')
+      .end((err, res) => {
+        if (err) throw err
+        expect(res.status).toBe(200)
+        expect(res.body.make).toEqual('vestel')
+        expect(res.body.model).toEqual('dvr_2014')
+        done()
+      })
+    })
+  })
   describe('if given an invalid whoami string', () => {
     it('Returns an error message', (done) => {
       request.get('/identify/json?whoami=some-fake-device')
