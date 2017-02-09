@@ -12,8 +12,6 @@
 <b><a href="#links">Useful Links</a></b>
 </p>
 
-![Matterhorn Sunset Photo](https://camo.githubusercontent.com/4ba74aa26b2968585c8516052e3f9f66623ee5c0/68747470733a2f2f616e746f696e656c616272616e6368652e66696c65732e776f726470726573732e636f6d2f323031322f30392f6d6174746572686f726e2d322e6a7067)
-
 ## Overview
 
 Matterhorn is a device identification service for the TV Application Platform (TAP).
@@ -65,6 +63,12 @@ docker-compose exec matterhorn npm run test:integration
 
 Currently the tests are run against each commit.
 If you want to build to an environment you must first make a tag, before building to TEST and then LIVE in Jenkins.
+
+## License
+
+TAL is available to everyone under the terms of the Apache 2.0 open source licence. Take a look at
+the LICENSE file in the code, and read our [faq](https://bbc.github.io/tal/faq.html#question_who_can_use_this)
+and [documentation](https://bbc.github.io/tal/other/contributing.html) to learn how to contribute.
 
 ---
 
