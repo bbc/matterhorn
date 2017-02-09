@@ -16,7 +16,7 @@ describe('Identify', () => {
         })
     })
   })
-  describe('if given valid a whoami string', () => {
+  describe('if given a valid whoami string', () => {
     it('Returns the correct device', (done) => {
       request.get('/identify/json?whoami=SNYLCD035')
       .end((err, res) => {
@@ -24,6 +24,18 @@ describe('Identify', () => {
         expect(res.status).toBe(200)
         expect(res.body.make).toEqual('sony')
         expect(res.body.model).toEqual('hbbtv_2013')
+        done()
+      })
+    })
+  })
+  describe('if given an invalid whoami string', () => {
+    it('Returns an error message', (done) => {
+      request.get('/identify/json?whoami=some-fake-device')
+      .end((err, res) => {
+        if (err) throw err
+        expect(res.status).toBe(404)
+        expect(res.body.error.make).toEqual('unknown')
+        expect(res.body.error.model).toEqual('unknown')
         done()
       })
     })
