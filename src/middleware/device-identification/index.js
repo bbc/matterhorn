@@ -1,9 +1,11 @@
 const whoami = require('./whoami')
 const userAgent = require('./user-agent')
 
-function deviceIdentification (req, res) {
+function deviceIdentification (req, res, next) {
   if (req.query.whoami) {
-    return res.json(whoami())
+    return whoami()
+      .then(data => res.json(data))
+      .catch(err => next(err))
   }
   if (req.query.ua) {
     return res.json(userAgent())

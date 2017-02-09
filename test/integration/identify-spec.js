@@ -23,6 +23,8 @@ describe('Identify', () => {
         if (err) throw err
         expect(res.status).toBe(200)
         expect(Array.isArray(res.body)).toEqual(true)
+        expect(res.body[0].make).toBeDefined()
+        expect(res.body[0].model).toBeDefined()
         done()
       })
     })
