@@ -66,9 +66,11 @@ If you want to build to an environment you must first make a tag, before buildin
 
 ## License
 
-TAL is available to everyone under the terms of the Apache 2.0 open source licence. Take a look at
+Matterhorn is available to everyone under the terms of the Apache 2.0 open source licence. Take a look at
 the LICENSE file in the code, and read our [faq](https://bbc.github.io/tal/faq.html#question_who_can_use_this)
 and [documentation](https://bbc.github.io/tal/other/contributing.html) to learn how to contribute.
+
+© BBC 2017
 
 ---
 
