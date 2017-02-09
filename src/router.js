@@ -3,7 +3,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const logger = require('./common/logger')
-const identifyDevice = require('./middleware/identify-device')
+const identifyDevice = require('./middleware/device-identification')
 
 const { name, version } = require('../package')
 
