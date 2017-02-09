@@ -16,4 +16,15 @@ describe('Identify', () => {
         })
     })
   })
+  describe('if given a whoami string', () => {
+    it('Returns all known whoami devices', (done) => {
+      request.get('/identify/json?whoami=some-whoami-string')
+      .end((err, res) => {
+        if (err) throw err
+        expect(res.status).toBe(200)
+        expect(Array.isArray(res.body)).toEqual(true)
+        done()
+      })
+    })
+  })
 })

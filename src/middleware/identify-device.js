@@ -1,8 +1,8 @@
 function identifyDeviceMiddleware (req, res, next) {
-  return res.json({
-    brand: 'brand',
-    model: 'model'
-  })
+  const brandModel = {brand: 'brand', model: 'model'}
+  const whoami = []
+
+  return req.query.ua ? res.json(brandModel) : res.json(whoami)
 }
 
 module.exports = identifyDeviceMiddleware
