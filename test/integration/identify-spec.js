@@ -16,15 +16,14 @@ describe('Identify', () => {
         })
     })
   })
-  describe('if given a whoami string', () => {
-    it('Returns all known whoami devices', (done) => {
-      request.get('/identify/json?whoami=some-whoami-string')
+  describe('if given valid a whoami string', () => {
+    it('Returns the correct device', (done) => {
+      request.get('/identify/json?whoami=SNYLCD035')
       .end((err, res) => {
         if (err) throw err
         expect(res.status).toBe(200)
-        expect(Array.isArray(res.body)).toEqual(true)
-        expect(res.body[0].make).toBeDefined()
-        expect(res.body[0].model).toBeDefined()
+        expect(res.body.make).toEqual('sony')
+        expect(res.body.model).toEqual('hbbtv_2013')
         done()
       })
     })
