@@ -3,7 +3,8 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const logger = require('./common/logger')
-const identifyDevice = require('./middleware/device-identification')
+const userAgent = require('./middleware/device-identification/user-agent')
+const whoami = require('./middleware/device-identification/whoami')
 
 const { name, version } = require('../package')
 
@@ -20,7 +21,8 @@ router.get('/version', (req, res) => {
   res.json({ version, name })
 })
 
-router.get('/identify/:format', identifyDevice)
+router.get('/identify/ua/:ua/:format', userAgent)
+router.get('/identify/whoami/:whoami/:format', whoami)
 
 router.use(require('./middleware/error-handling'))
 

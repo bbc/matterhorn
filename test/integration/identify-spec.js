@@ -6,7 +6,7 @@ const request = req(app.listen())
 describe('Identify', () => {
   describe('if given a user agent', () => {
     it('Returns a brand and model key', (done) => {
-      request.get('/identify/json?ua=some-user-agent')
+      request.get('/identify/ua/some-user-agent/json')
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
@@ -18,7 +18,7 @@ describe('Identify', () => {
   })
   describe('if given a valid whoami string', () => {
     it('Returns the correct device', (done) => {
-      request.get('/identify/json?whoami=SNYLCD035')
+      request.get('/identify/whoami/SNYLCD035/json')
       .end((err, res) => {
         if (err) throw err
         expect(res.status).toBe(200)
@@ -30,19 +30,19 @@ describe('Identify', () => {
   })
   describe('if given a valid whoami string with URI encoded characters', () => {
     it('Returns the correct device', (done) => {
-      request.get('/identify/json?whoami=CABECL765%20MHGCAB765%20DSMCAB765')
+      request.get('/identify/whoami/DSTPVR001%20MHGS&T271%20DSMS&T271/json')
       .end((err, res) => {
         if (err) throw err
         expect(res.status).toBe(200)
-        expect(res.body.make).toEqual('vestel')
-        expect(res.body.model).toEqual('dvr_2014')
+        expect(res.body.make).toEqual('digital stream')
+        expect(res.body.model).toEqual('DHR8203U')
         done()
       })
     })
   })
   describe('if given an invalid whoami string', () => {
     it('Returns an error message', (done) => {
-      request.get('/identify/json?whoami=some-fake-device')
+      request.get('/identify/whoami/some-fake-device/json')
       .end((err, res) => {
         if (err) throw err
         expect(res.status).toBe(404)
