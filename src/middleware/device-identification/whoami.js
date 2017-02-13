@@ -13,6 +13,7 @@ const errorResponse = {
 }
 
 function sendResponse (res, device) {
+  res.setHeader('x-matterhorn-whoami-device', JSON.stringify(device))
   res.json({
     brand: device.brand,
     model: device.model
