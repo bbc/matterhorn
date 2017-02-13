@@ -24,7 +24,10 @@ function identifyDeviceByWhoami (req, res, next) {
       const device = R.compose(firstMatch, filterMatches)(allDevices)
       if (device) {
         deviceCache[whoami] = device
-        return res.json(device)
+        return res.json({
+          brand: device.brand,
+          model: device.model
+        })
       }
       return next(errorResponse)
     })
