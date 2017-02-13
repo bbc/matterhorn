@@ -3,19 +3,20 @@ const R = require('ramda')
 const request = require('../../common/request-promise')
 const deviceCache = {}
 
+const errorResponse = {
+  error: true,
+  code: 404,
+  message: {
+    brand: 'unknown',
+    model: 'unknown'
+  }
+}
+
 function identifyDeviceByWhoami (req, res, next) {
   const whoami = req.params.whoami
   if (deviceCache[whoami]) return res.json(deviceCache[whoami])
   return request.get('https://connected-tv.files.bbci.co.uk/tvp-whoami/data/json')
     .then((body) => {
-      const error = {
-        error: true,
-        code: 404,
-        message: {
-          make: 'unknown',
-          model: 'unknown'
-        }
-      }
       const allDevices = body.body
       const matchPattern = item => new RegExp(item.who_am_i_pattern).test(whoami)
       const filterMatches = R.filter(matchPattern)
@@ -25,7 +26,7 @@ function identifyDeviceByWhoami (req, res, next) {
         deviceCache[whoami] = device
         return res.json(device)
       }
-      return next(error)
+      return next(errorResponse)
     })
 }
 
