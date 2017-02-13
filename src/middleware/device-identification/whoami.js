@@ -12,9 +12,19 @@ const errorResponse = {
   }
 }
 
+function sendResponse (res, device) {
+  res.json({
+    brand: device.brand,
+    model: device.model
+  })
+}
+
 function identifyDeviceByWhoami (req, res, next) {
   const whoami = req.params.whoami
-  if (deviceCache[whoami]) return res.json(deviceCache[whoami])
+  if (deviceCache[whoami]) {
+    return sendResponse(res, deviceCache[whoami])
+  }
+
   return request.get('https://connected-tv.files.bbci.co.uk/tvp-whoami/data/json')
     .then((body) => {
       const allDevices = body.body
@@ -24,10 +34,7 @@ function identifyDeviceByWhoami (req, res, next) {
       const device = R.compose(firstMatch, filterMatches)(allDevices)
       if (device) {
         deviceCache[whoami] = device
-        return res.json({
-          brand: device.brand,
-          model: device.model
-        })
+        return sendResponse(res, deviceCache[whoami])
       }
       return next(errorResponse)
     })
