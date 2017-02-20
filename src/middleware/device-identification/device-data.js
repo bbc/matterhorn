@@ -3,14 +3,10 @@ const request = require('../../common/request-promise')
 let devices
 
 function makeRequest() {
-  request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
-  .then(response => {
-    devices = response.body
-  })
+  return request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
 }
 
-setInterval(makeRequest, 300000);
-makeRequest();
+setInterval(_ => makeRequest().then(response => devices = response.body), 300000);
 
 module.exports = function (req, res, next) {
   if (devices) {
@@ -18,5 +14,10 @@ module.exports = function (req, res, next) {
     return next()
   } else {
     return makeRequest()
+      .then(response => {
+        devices = response.body
+        req.deviceData = devices
+        return next()
+      })
   }
 }
