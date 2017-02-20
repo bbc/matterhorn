@@ -1,9 +1,9 @@
 const melanite = require('melanite')
 
-const stubData = require('../../../data/dummy-data.json')
+const request = require('../../common/request-promise')
 
 function identifyDeviceByUserAgent (req, res) {
-  const match = melanite.match(stubData)
+  const match = melanite.match(req.deviceData)
   return res.json(match(req.params.ua))
 }
 
