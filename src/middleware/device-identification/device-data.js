@@ -1,12 +1,19 @@
 const request = require('../../common/request-promise')
+const logger = require('../../common/logger')
 
 let devices
 
-function makeRequest() {
+function makeRequest () {
   return request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
 }
 
-setInterval(_ => makeRequest().then(response => devices = response.body), 300000);
+setInterval(_ => {
+  return makeRequest()
+    .then(response => devices = response.body)
+    .catch(err => {
+      logger.error('Error requesting device data', error)
+    })
+}, 300000);
 
 module.exports = function (req, res, next) {
   if (devices) {
@@ -19,5 +26,6 @@ module.exports = function (req, res, next) {
         req.deviceData = devices
         return next()
       })
+      .catch(err => next({ status: 502 }))
   }
 }
