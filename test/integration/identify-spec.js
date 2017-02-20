@@ -4,14 +4,26 @@ const app = require('../../src/app')
 const request = req(app.listen())
 
 describe('Identify', () => {
-  describe('if given a user agent', () => {
-    it('Returns a brand and model key', (done) => {
-      request.get('/identify/ua/some-user-agent/json')
+  describe('if given a valid user agent', () => {
+    it('Returns the correct device', (done) => {
+      request.get('/identify/ua/Google%20Chrome%20device/json')
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
-          expect(res.body.brand).toBeDefined()
-          expect(res.body.model).toBeDefined()
+          expect(res.body.brand).toEqual('google')
+          expect(res.body.model).toEqual('chrome')
+          done()
+        })
+    })
+  })
+  describe('if given an invalid user agent', () => {
+    it('Returns an error message', (done) => {
+      request.get('/identify/ua/some-fake-user-agent/json')
+        .end((err, res) => {
+          if (err) throw err
+          expect(res.status).toBe(404)
+          expect(res.body.brand).toEqual(null)
+          expect(res.body.model).toEqual(null)
           done()
         })
     })
