@@ -9,11 +9,11 @@ function makeRequest () {
 
 setInterval(_ => {
   return makeRequest()
-    .then(response => devices = response.body)
+    .then(response => { devices = response.body })
     .catch(err => {
-      logger.error('Error requesting device data', error)
+      logger.error('Error requesting device data', err)
     })
-}, 300000);
+}, 300000)
 
 module.exports = function (req, res, next) {
   if (devices) {
@@ -26,6 +26,6 @@ module.exports = function (req, res, next) {
         req.deviceData = devices
         return next()
       })
-      .catch(err => next({ status: 502 }))
+      .catch(_ => next({ status: 502 }))
   }
 }
