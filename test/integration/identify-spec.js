@@ -21,7 +21,7 @@ describe('Identify', () => {
       request.get('/identify/ua/some-fake-user-agent/json')
         .end((err, res) => {
           if (err) throw err
-          expect(res.status).toBe(200)
+          expect(res.status).toBe(404)
           expect(res.body.brand).toEqual(null)
           expect(res.body.model).toEqual(null)
           done()
