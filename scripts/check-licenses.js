@@ -102,9 +102,9 @@ function ppProblems(title, items) {
   return [title].concat(rows).join(NL);
 }
 
-console.log(ppLicensed('Acceptable Projects', licensed), NL);
+console.log(ppLicensed('Acceptable project licenses (uses):', licensed), NL);
 
-console.log(ppExceptions('Acceptable Exceptions', exceptions), NL);
+console.log(ppExceptions('Acceptable project license exceptions:', exceptions), NL);
 
 const summary = [
   colors.green(`Licensed (${licensedCount})`),
