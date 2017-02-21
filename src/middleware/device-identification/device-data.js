@@ -1,33 +1,33 @@
 const request = require('../../common/request-promise')
-const logger = require('../../common/logger')
+const updateIntervalMs = 5 * 60 * 1000 // 5 minutes in milliseconds
 
-let devices
+let devices, activeRequest
 
 function makeRequest () {
   return request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
 }
 
 function updateDeviceData () {
-  return makeRequest()
-    .then(response => { devices = response.body })
-    .catch(err => {
-      logger.error('Error requesting device data', err)
+  activeRequest = makeRequest()
+    .then(response => {
+      devices = response.body
+      activeRequest = null
+      setInterval(updateDeviceData, updateIntervalMs)
+      return devices
     })
+  return activeRequest
 }
 
-const updateIntervalMs = 5 * 60 * 1000 // 5 minutes in milliseconds
-setInterval(updateDeviceData, updateIntervalMs)
-
-module.exports = function (req, res, next) {
+function fetch () {
   if (devices) {
-    req.deviceData = devices
-    return next()
+    return Promise.resolve(devices)
   } else {
-    return updateDeviceData()
-      .then(response => {
-        req.deviceData = devices
-      })
-      .then(next)
-      .catch(_ => next({ status: 502 }))
+    return activeRequest
   }
+}
+
+updateDeviceData()
+
+module.exports = {
+  fetch
 }
