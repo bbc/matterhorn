@@ -1,4 +1,4 @@
-const logger = require('../common/logger')
+const logger = require('../logger')
 
 function errorHandlingMiddleware (error, req, res, next) {
   error = Object.assign(error, { responseError: true, url: req.url })
