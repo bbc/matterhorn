@@ -3,7 +3,7 @@
   "version": "0.15.2",
   "description": "matterhorn",
   "engines": {
-    "node": "6.9.5",
+    "node": "6.10.0",
     "npm": "3.10.10"
   },
   "repository": {
