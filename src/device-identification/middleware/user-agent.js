@@ -1,5 +1,5 @@
 const melanite = require('melanite')
-const deviceData = require('./device-data')
+const deviceData = require('../models/device-data')
 
 const logger = require('../../common/logger')
 

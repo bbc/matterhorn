@@ -4,8 +4,8 @@ const morgan = require('morgan')
 
 const logger = require('./common/logger')
 
-const userAgent = require('./middleware/device-identification/user-agent')
-const whoami = require('./middleware/device-identification/whoami')
+const userAgent = require('./device-identification/middleware/user-agent')
+const whoami = require('./device-identification/middleware/whoami')
 
 const { name, version } = require('../package')
 
@@ -25,6 +25,6 @@ router.get('/version', (req, res) => {
 router.get('/identify/ua/:ua/:format', userAgent)
 router.get('/identify/whoami/:whoami/:format', whoami)
 
-router.use(require('./middleware/error-handling'))
+router.use(require('./common/middleware/error-handling'))
 
 module.exports = router
