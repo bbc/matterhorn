@@ -113,7 +113,7 @@
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "flashheart": "^2.6.0",
-    "melanite": "0.2.0",
+    "melanite": "1.0.0",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0",
     "ramda": "^0.23.0",

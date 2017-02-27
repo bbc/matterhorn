@@ -22,8 +22,8 @@ describe('Identify', () => {
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(404)
-          expect(res.body.brand).toEqual(null)
-          expect(res.body.model).toEqual(null)
+          expect(res.body.brand).toEqual('generic')
+          expect(res.body.model).toEqual('device')
           done()
         })
     })

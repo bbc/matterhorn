@@ -3,30 +3,25 @@ const deviceData = require('../models/device-data')
 
 const logger = require('../../common/logger')
 
-function deviceError (req, res) {
-  logger.warn('Request received for unknown user-agent:', req.params.ua)
+function error (res) {
   return res.status(404).json({
-    brand: null,
-    model: null
-  })
-}
-
-function noDevicesError (req, res) {
-  logger.warn('No data available for devices, unable to match user-agent:', req.params.ua)
-  return res.status(404).json({
-    brand: null,
-    model: null
+    brand: 'generic',
+    model: 'device'
   })
 }
 
 function respond (req, res, devices) {
   if (!devices) {
-    return noDevicesError(req, res)
+    logger.warn(`No data available for devices, unable to match user-agent: ${req.params.ua}`)
+    return error(res)
   }
+
   const match = melanite.match(devices)
   const device = match(req.params.ua)
-  if (!device) {
-    return deviceError(req, res)
+
+  if (device.brand === 'generic') {
+    logger.warn(`Request received for unknown user-agent: ${req.params.ua}`)
+    return error(res)
   }
   return res.json(device)
 }
