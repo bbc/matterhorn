@@ -5,17 +5,12 @@ const logger = require('../../common/logger')
 
 function error (res) {
   return res.status(404).json({
-    brand: 'generic',
-    model: 'device'
+    brand: null,
+    model: null
   })
 }
 
 function respond (req, res, devices) {
-  if (!devices) {
-    logger.warn(`No data available for devices, unable to match user-agent: ${req.params.ua}`)
-    return error(res)
-  }
-
   const match = melanite.match(devices)
   const device = match(req.params.ua)
 
