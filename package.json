@@ -33,7 +33,7 @@
     "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name matterhorn --client-cert $COSMOS_CERT",
     "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack matterhorn",
     "cosmos:deploy": "cd pipeline; cosmos-deploy deploy matterhorn",
-    "check-licenses": "license-checker --json --out licences.json && node scripts/check-licenses.js",
+    "check-licenses": "tvp-apache2-license-checker",
     "help": "npm-help"
   },
   "scriptHelp": {
@@ -124,7 +124,6 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "colors": "^1.1.2",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-jasmine": "^2.2.0",
@@ -132,11 +131,11 @@
     "eslint-plugin-standard": "^2.0.1",
     "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "^3.2.0",
-    "license-checker": "^8.0.3",
     "nodemon": "^1.11.0",
     "npm-script-help": "^1.0.0",
     "split-ca": "^1.0.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "tvp-apache2-license-checker": "^1.0.0"
   },
   "optionalDependencies": {
     "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
