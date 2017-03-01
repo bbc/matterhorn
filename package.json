@@ -135,7 +135,7 @@
     "npm-script-help": "^1.0.0",
     "split-ca": "^1.0.1",
     "supertest": "^3.0.0",
-    "tvp-apache2-license-checker": "^1.0.0"
+    "tvp-apache2-license-checker": "^1.0.1"
   },
   "optionalDependencies": {
     "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
