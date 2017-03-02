@@ -12,7 +12,7 @@ function error (res) {
 
 function respond (req, res, devices) {
   const match = melanite.match(devices)
-  const device = match(req.params.ua)
+  const device = match(decodeURIComponent(req.params.ua))
 
   if (device.brand === 'generic') {
     logger.warn(`Request received for unknown user-agent: ${req.params.ua}`)
