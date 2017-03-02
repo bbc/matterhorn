@@ -6,7 +6,7 @@ const request = req(app.listen())
 describe('Identify', () => {
   describe('if given a valid user agent', () => {
     it('Returns the correct device', (done) => {
-      request.get('/identify/ua/Google%20Chrome%20device/json')
+      request.get('/identify/ua/Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_11_6)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F56.0.2924.87%20Safari%2F537.36/json')
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
