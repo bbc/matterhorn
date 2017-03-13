@@ -9,7 +9,7 @@
 |
 <b><a href="#releasing">Releasing</a></b>
 |
-<b><a href="#links">Useful Links</a></b>
+<b><a href="#useful-links">Useful Links</a></b>
 </p>
 
 ## Overview
@@ -64,6 +64,12 @@ docker-compose exec matterhorn npm run test:integration
 
 Currently the tests are run against each commit.
 If you want to build to an environment you must first make a tag, before building to TEST and then LIVE in Jenkins.
+
+### Useful Links
+
+* [melanite](https://github.com/bbc/melanite)
+* [device identification data](https://github.com/bbc/device-identification-data)
+* [TAL](https://github.com/bbc/tal)
 
 ## License
 
