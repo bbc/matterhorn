@@ -9,7 +9,7 @@
 |
 <b><a href="#releasing">Releasing</a></b>
 |
-<b><a href="#links">Useful Links</a></b>
+<b><a href="#useful-links">Useful Links</a></b>
 </p>
 
 ## Overview
