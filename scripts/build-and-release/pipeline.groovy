@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'centos7'
     }
+    tools {
+        nodejs 'LTS'
+    }
     stages {
         stage('Checkout repo') {
             steps {
