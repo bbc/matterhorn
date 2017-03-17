@@ -12,8 +12,11 @@ pipeline {
   }
   */
   post {
+      success {
+          // slackSend channel: 'matterhorn', color: 'green', message: "Matterhorn pipeline build succeeded"
+      }
       failure {
-          slackSend channel: 'matterhorn', color: 'red', message: "[DEBUG] Matterhorn pipeline build"
+          // slackSend channel: 'matterhorn', color: 'red', message: "Matterhorn pipeline build failed"
       }
   }
   stages {
