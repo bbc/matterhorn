@@ -12,7 +12,6 @@ pipeline {
     }
     */
     environment {
-        MATTERHORN_VERSION = sh(returnStdout: true, script: "git describe --abbrev=0")
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
     }
     // Commenting out slackSend until we can get an integration token
@@ -39,7 +38,7 @@ pipeline {
         }
         stage('Create a release') {
             environment {
-                RELEASE_EXISTS = sh(returnStdout: true, script: 'cosmos releases matterhorn | grep $MATTERHORN_VERSION')
+                RELEASE_EXISTS = sh(returnStdout: true, script: 'cosmos releases matterhorn | grep $(node -e "console.log(require('./package.json').version)")')
             }
             when {
                 expression { env.RELEASE_EXISTS }
