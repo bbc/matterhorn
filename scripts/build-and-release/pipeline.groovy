@@ -37,7 +37,7 @@ pipeline {
             }
         }
         stage('List releases') {
-            stage {
+            steps {
                 sh 'cosmos releases matterhorn'
             }
         }
