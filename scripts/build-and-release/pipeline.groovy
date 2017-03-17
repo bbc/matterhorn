@@ -14,14 +14,17 @@ pipeline {
   environment {
       IS_TAGGED_COMMIT = sh(returnStdout: true, script: 'git tag -l --points-at HEAD')
   }
+  // Commenting out slackSend until we can get an integration token
+  /*
   post {
       success {
-          // slackSend channel: 'matterhorn', color: 'green', message: "Matterhorn pipeline build succeeded"
+          slackSend channel: 'matterhorn', color: 'green', message: "Matterhorn pipeline build succeeded"
       }
       failure {
-          // slackSend channel: 'matterhorn', color: 'red', message: "Matterhorn pipeline build failed"
+          slackSend channel: 'matterhorn', color: 'red', message: "Matterhorn pipeline build failed"
       }
   }
+  */
   stages {
     stage('Install dependencies') {
       steps {
