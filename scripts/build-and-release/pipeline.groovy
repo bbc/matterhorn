@@ -36,12 +36,9 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Create a release') {
+        stage('Create a release if necessary') {
             steps {
-                script {
-                    export MATTERHORN_VERSION=$(cosmos releases matterhorn | grep $(node -e 'console.log(require("./package.json").version)'))
-                    npm run release
-                }
+                sh './scripts/build-and-release/release-if-necessary.sh'
             }
         }
     }
