@@ -11,6 +11,11 @@ pipeline {
     nodejs 'LTS'
   }
   */
+  post {
+      failure {
+          slackSend color: 'danger', message: "[DEBUG] Matterhorn pipeline build"
+      }
+  }
   stages {
     stage('Install dependencies') {
       steps {
