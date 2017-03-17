@@ -41,6 +41,7 @@ pipeline {
           expression { env.IS_TAGGED_COMMIT != "" }
       }
       steps {
+        sh 'echo $IS_TAGGED_COMMIT'
         sh 'npm run release'
       }
     }
