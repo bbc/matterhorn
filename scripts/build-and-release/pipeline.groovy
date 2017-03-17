@@ -37,14 +37,11 @@ pipeline {
             }
         }
         stage('Create a release') {
-            environment {
-                RELEASE_EXISTS = sh(returnStdout: true, script: "cosmos releases matterhorn | grep \$5(node -e 'console.log(require("./package.json").version)')")
-            }
-            when {
-                expression { env.RELEASE_EXISTS }
-            }
             steps {
-                sh 'npm run release'
+                script {
+                    export MATTERHORN_VERSION=$(cosmos releases matterhorn | grep $(node -e 'console.log(require("./package.json").version)'))
+                    npm run release
+                }
             }
         }
     }
