@@ -36,6 +36,11 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('List releases') {
+            stage {
+                sh 'cosmos releases matterhorn'
+            }
+        }
         stage('Create a release') {
             when {
                 expression { env.IS_TAGGED_COMMIT != "" }
