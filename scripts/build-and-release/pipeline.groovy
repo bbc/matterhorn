@@ -34,6 +34,9 @@ pipeline {
           }
       }
     stage('Create a release') {
+      when {
+          expression { IS_TAGGED_COMMIT != "" }
+      }
       steps {
         sh 'npm run release'
       }
