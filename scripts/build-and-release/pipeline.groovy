@@ -11,6 +11,9 @@ pipeline {
     nodejs 'LTS'
   }
   */
+  environment {
+      IS_TAGGED_COMMIT = sh(returnStdout: true, script: 'git tag -l --points-at HEAD')
+  }
   post {
       success {
           // slackSend channel: 'matterhorn', color: 'green', message: "Matterhorn pipeline build succeeded"
