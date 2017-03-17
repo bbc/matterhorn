@@ -12,7 +12,8 @@ pipeline {
     }
     */
     environment {
-        IS_TAGGED_COMMIT = sh(returnStdout: true, script: 'git tag -l --points-at HEAD')
+        MATTERHORN_VERSION = sh(returnStdout: true, script: 'node -e "console.log(require(\'./package.json\').version)"')
+        COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
     }
     // Commenting out slackSend until we can get an integration token
     /*
@@ -38,7 +39,7 @@ pipeline {
         }
         stage('List releases') {
             steps {
-                sh 'cosmos releases matterhorn'
+                sh 'cosmos releases matterhorn | grep $MATTERHORN_VERSION'
             }
         }
         stage('Create a release') {
