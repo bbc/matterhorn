@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Create a release') {
             environment {
-                RELEASE_EXISTS = sh(returnStdout: true, script: 'cosmos releases matterhorn | grep $(node -e "console.log(require('./package.json').version)")')
+                RELEASE_EXISTS = sh(returnStdout: true, script: "cosmos releases matterhorn | grep $(node -e 'console.log(require("./package.json").version)')")
             }
             when {
                 expression { env.RELEASE_EXISTS }
