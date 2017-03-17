@@ -12,7 +12,7 @@ pipeline {
     }
     */
     environment {
-        MATTERHORN_VERSION = sh(returnStdout: true, script: "node -e \"console.log(require('./package.json').version)\"")
+        MATTERHORN_VERSION = sh(returnStdout: true, script: 'git describe --abbrev=0')
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
     }
     // Commenting out slackSend until we can get an integration token
