@@ -37,14 +37,14 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('List releases') {
+        stage('Determine if release already exists') {
             steps {
-                sh 'cosmos releases matterhorn | grep $MATTERHORN_VERSION'
+                env.RELEASE_EXISTS = sh(returnStdout: true, script: 'cosmos releases matterhorn | grep $MATTERHORN_VERSION')
             }
         }
         stage('Create a release') {
             when {
-                expression { env.IS_TAGGED_COMMIT != "" }
+                expression { env.RELEASE_EXISTS }
             }
             steps {
                 sh 'npm run release'
