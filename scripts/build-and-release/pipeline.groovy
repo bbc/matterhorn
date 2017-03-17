@@ -13,7 +13,7 @@ pipeline {
   */
   post {
       failure {
-          slackSend color: 'danger', message: "[DEBUG] Matterhorn pipeline build"
+          slackSend channel: 'matterhorn', color: 'red', message: "[DEBUG] Matterhorn pipeline build"
       }
   }
   stages {
