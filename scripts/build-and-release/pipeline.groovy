@@ -39,7 +39,7 @@ pipeline {
         stage('Create a release if necessary') {
             when {
                 expression {
-                    "NO" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
+                    "YES" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
                 }
             }
             steps {
@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy to TEST if necessary') {
             when {
                 expression {
-                    "NO" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
+                    "YES" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
                 }
             }
             steps {
