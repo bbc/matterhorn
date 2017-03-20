@@ -37,8 +37,23 @@ pipeline {
             }
         }
         stage('Create a release if necessary') {
+            when {
+                expression {
+                    './scripts/build-and-release/is-new-version.sh'.execute()
+                }
+            }
             steps {
-                sh './scripts/build-and-release/release-if-necessary.sh'
+                sh 'npm run release'
+            }
+        }
+        stage('Deploy to TEST if necessary') {
+            when {
+                expression {
+                    './scripts/build-and-release/is-new-version.sh'.execute()
+                }
+            }
+            steps {
+                sh 'echo "Hello, world!"'
             }
         }
     }
