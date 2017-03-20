@@ -57,5 +57,10 @@ pipeline {
                 sh 'npm run cosmos:deploy -- test `echo $VERSION | cut -c 2-`'
             }
         }
+        stage('Clean directories') {
+            steps {
+                deleteDir()
+            }
+        }
     }
 }
