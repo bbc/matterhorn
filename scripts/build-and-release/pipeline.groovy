@@ -53,7 +53,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'echo "Hello, world!"'
+                sh 'npm run cosmos:deploy -- test `node -e \'console.log(require("./package.json").version)\'`'
             }
         }
     }
