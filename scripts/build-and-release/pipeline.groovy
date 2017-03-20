@@ -15,17 +15,20 @@ pipeline {
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
         VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
     }
-    // Commenting out slackSend until we can get an integration token
-    /*
     post {
+        // Commenting out slackSend until we can get an integration token
+        /*
         success {
             slackSend channel: 'matterhorn', color: 'green', message: "Matterhorn pipeline build succeeded"
         }
         failure {
             slackSend channel: 'matterhorn', color: 'red', message: "Matterhorn pipeline build failed"
         }
+        */
+        always {
+            deleteDir()
+        }
     }
-    */
     stages {
         stage('Install dependencies') {
             steps {
@@ -55,11 +58,6 @@ pipeline {
             }
             steps {
                 sh 'npm run cosmos:deploy -- test `echo $VERSION | cut -c 2-`'
-            }
-        }
-        stage('Clean directories') {
-            steps {
-                deleteDir()
             }
         }
     }
