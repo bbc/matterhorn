@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-VERSION_ALREADY_EXISTS=$(cosmos releases matterhorn | grep $(node -e 'console.log(require("./package.json").version)'))
+cosmos releases matterhorn | grep $(node -e 'console.log(require("./package.json").version)') > /dev/null
 
-if [ $VERSION_ALREADY_EXISTS ]; then
+if [ $? -eq 0 ]; then
   echo "NO"
 else
   echo "YES"

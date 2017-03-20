@@ -57,7 +57,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm run cosmos:deploy -- test `echo $VERSION | cut -c 2-`'
+                sh 'npm run cosmos:deploy -- test $VERSION'
             }
         }
     }
