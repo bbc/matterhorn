@@ -11,9 +11,21 @@ pipeline {
       nodejs 'LTS'
     }
     */
+    parameters {
+        string(
+            name: 'VERSION',
+            defaultValue: sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim(),
+            description: 'The version of Matterhorn to deploy'
+        )
+        string(
+            name: 'ENVIRONMENT',
+            defaultValue: 'test',
+            description: 'The environment to deploy too'
+        )
+    }
     environment {
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
-        VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
+        // VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
     }
     stages {
         stage('Install dependencies') {
@@ -34,7 +46,7 @@ pipeline {
             }
             steps {
                 sh 'npm run release'
-                sh 'npm run cosmos:deploy -- test $VERSION'
+                sh 'npm run cosmos:deploy -- $ENVIRONMENT $VERSION'
             }
         }
     }
