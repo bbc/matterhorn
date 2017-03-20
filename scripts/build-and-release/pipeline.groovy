@@ -13,6 +13,7 @@ pipeline {
     */
     environment {
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
+        VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
     }
     // Commenting out slackSend until we can get an integration token
     /*
@@ -53,7 +54,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm run cosmos:deploy -- test `node -e \'console.log(require("./package.json").version)\'`'
+                sh 'npm run cosmos:deploy -- test `echo $VERSION | cut -c 2-`'
             }
         }
     }
