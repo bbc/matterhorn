@@ -12,7 +12,6 @@ pipeline {
     }
     */
     environment {
-        COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
         VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
         IS_NEW_VERSION = sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh').trim()
     }
