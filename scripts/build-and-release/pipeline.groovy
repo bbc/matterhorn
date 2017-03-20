@@ -40,7 +40,7 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Create a release if necessary') {
+        stage('Release and deploy if necessary') {
             when {
                 expression {
                     "YES" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh').trim()
@@ -48,15 +48,6 @@ pipeline {
             }
             steps {
                 sh 'npm run release'
-            }
-        }
-        stage('Deploy to TEST if necessary') {
-            when {
-                expression {
-                    "YES" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh').trim()
-                }
-            }
-            steps {
                 sh 'npm run cosmos:deploy -- test $VERSION'
             }
         }
