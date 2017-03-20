@@ -39,7 +39,8 @@ pipeline {
         stage('Create a release if necessary') {
             when {
                 expression {
-                    './scripts/build-and-release/is-new-version.sh'.execute()
+                    version_already_exists = sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
+                    version_already_exists == "NO"
                 }
             }
             steps {
@@ -49,7 +50,8 @@ pipeline {
         stage('Deploy to TEST if necessary') {
             when {
                 expression {
-                    './scripts/build-and-release/is-new-version.sh'.execute()
+                    version_already_exists = sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh')
+                    version_already_exists == "NO"
                 }
             }
             steps {
