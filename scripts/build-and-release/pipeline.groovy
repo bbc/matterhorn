@@ -14,6 +14,7 @@ pipeline {
     environment {
         COSMOS_CERT = '/etc/pki/tls/private/client_crt_key.pem'
         VERSION = sh(returnStdout: true, script: './scripts/build-and-release/get-version.sh').trim()
+        IS_NEW_VERSION = sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh').trim()
     }
     stages {
         stage('Install dependencies') {
@@ -27,11 +28,7 @@ pipeline {
             }
         }
         stage('Release and deploy if necessary') {
-            when {
-                expression {
-                    "YES" == sh(returnStdout: true, script: './scripts/build-and-release/is-new-version.sh').trim()
-                }
-            }
+            when { environment name: 'IS_NEW_VERSION', value: 'YES' }
             steps {
                 sh 'npm run release'
                 sh 'npm run cosmos:deploy -- test $VERSION'
