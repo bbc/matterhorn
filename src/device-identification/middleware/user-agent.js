@@ -6,14 +6,15 @@ const logger = require('../../common/logger')
 function error (res) {
   return res.status(404).json({
     brand: null,
-    model: null
+    model: null,
+    type: 'unknown'
   })
 }
 
 function respond (req, res, devices) {
   const match = melanite.match(devices)
   const device = match(decodeURIComponent(req.params.ua))
-
+  console.log(device);
   if (device.brand === 'generic') {
     logger.warn(`Request received for unknown user-agent: ${req.params.ua}`)
     return error(res)
@@ -31,7 +32,8 @@ function identifyDeviceByUserAgent (req, res) {
       logger.error(ex, req.params.ua)
       res.status(404).json({
         brand: null,
-        model: null
+        model: null,
+        type: 'unknown'
       })
     })
 }
