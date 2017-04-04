@@ -15,6 +15,16 @@ describe('Identify', () => {
           expect(res.body.type).toEqual('unknown')
           done()
         })
+
+      request.get('/identify/ua/smarttv_AFTS_Build_565189620_Chromium_34.0.1847.114/json')
+        .end((err, res) => {
+          if (err) throw err
+          expect(res.status).toBe(200)
+          expect(res.body.brand).toEqual('amazon')
+          expect(res.body.model).toEqual('firetv_2015')
+          expect(res.body.type).toEqual('tv')
+          done()
+        })
     })
   })
   describe('if given an invalid user agent', () => {
