@@ -14,7 +14,7 @@
 
 ## Overview
 
-Matterhorn is a device identification service for the TV Application Platform (TAP).
+Matterhorn is a device identification service for the TV Application Platform (TAP)
 
 ## Architecture
 
