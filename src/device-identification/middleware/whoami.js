@@ -37,7 +37,7 @@ function identifyDeviceByWhoami (req, res, next) {
       const filterMatches = R.filter(matchPattern)
       const firstMatch = R.head
       const device = R.compose(firstMatch, filterMatches)(allDevices)
-      
+
       if (device) {
         deviceCache[whoami] = device
         logResponseTime(startTime)
