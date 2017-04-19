@@ -1,6 +1,8 @@
 const R = require('ramda')
 
 const request = require('../../common/request-promise')
+const logResponseTime = require('../../common/log-response-time')
+
 const deviceCache = {}
 
 const errorResponse = {
@@ -21,6 +23,8 @@ function sendResponse (res, device) {
 }
 
 function identifyDeviceByWhoami (req, res, next) {
+  const startTime = Date.now()
+
   const whoami = req.params.whoami
   if (deviceCache[whoami]) {
     return sendResponse(res, deviceCache[whoami])
@@ -33,10 +37,14 @@ function identifyDeviceByWhoami (req, res, next) {
       const filterMatches = R.filter(matchPattern)
       const firstMatch = R.head
       const device = R.compose(firstMatch, filterMatches)(allDevices)
+      
       if (device) {
         deviceCache[whoami] = device
+        logResponseTime(startTime)
         return sendResponse(res, deviceCache[whoami])
       }
+
+      logResponseTime(startTime)
       return next(errorResponse)
     })
 }
