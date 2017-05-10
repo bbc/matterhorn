@@ -6,6 +6,7 @@ const logger = require('./common/logger')
 
 const userAgent = require('./device-identification/middleware/user-agent')
 const whoami = require('./device-identification/middleware/whoami')
+const cacheControl = require('./common/middleware/cacheControl')
 
 const { name, version } = require('../package')
 
@@ -21,6 +22,8 @@ router.get('/status', (req, res) => {
 router.get('/version', (req, res) => {
   res.json({ version, name })
 })
+
+router.use(cacheControl)
 
 router.get('/identify/ua/:ua/:format', userAgent)
 router.get('/identify/whoami/:whoami/:format', whoami)
