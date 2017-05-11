@@ -26,6 +26,15 @@ describe('Identify', () => {
           done()
         })
     })
+    it('Contains the expected cache headers', (done) => {
+      request.get('/identify/ua/smarttv_AFTS_Build_565189620_Chromium_34.0.1847.114/json')
+        .end((err, res) => {
+          if (err) throw err
+          expect(res.status).toBe(200)
+          expect(res.headers['cache-control']).toEqual('public, max-age=300')
+          done()
+        })
+    })
   })
   describe('if given an invalid user agent', () => {
     it('Returns an error message', (done) => {
@@ -48,6 +57,15 @@ describe('Identify', () => {
           expect(res.status).toBe(200)
           expect(res.body.brand).toEqual('sony')
           expect(res.body.model).toEqual('hbbtv_2013')
+          done()
+        })
+    })
+    it('Contains the expected cache headers', (done) => {
+      request.get('/identify/whoami/SNYLCD035/json')
+        .end((err, res) => {
+          if (err) throw err
+          expect(res.status).toBe(200)
+          expect(res.headers['cache-control']).toEqual('public, max-age=300')
           done()
         })
     })
