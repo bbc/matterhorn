@@ -76,8 +76,8 @@ describe('Identify', () => {
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
-          expect(res.body.brand).toEqual('digitalstream')
-          expect(res.body.model).toEqual('DHR8203U')
+          expect(res.body.brand).toEqual('digital_stream')
+          expect(res.body.model).toEqual('dhr8203u')
           done()
         })
     })
