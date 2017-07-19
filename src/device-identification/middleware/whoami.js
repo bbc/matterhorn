@@ -1,6 +1,6 @@
 const R = require('ramda')
 
-const request = require('../../common/request-promise')
+const whoamiModel = require('../models/whoami-data')
 const deviceCache = {}
 
 const errorResponse = {
@@ -26,9 +26,8 @@ function identifyDeviceByWhoami (req, res, next) {
     return sendResponse(res, deviceCache[whoami])
   }
 
-  return request.get('https://connected-tv.files.bbci.co.uk/tvp-whoami/data/json')
-    .then((body) => {
-      const allDevices = body.body
+  return whoamiModel.fetch()
+    .then((allDevices) => {
       const matchPattern = item => new RegExp(item.who_am_i_pattern).test(whoami)
       const filterMatches = R.filter(matchPattern)
       const firstMatch = R.head
