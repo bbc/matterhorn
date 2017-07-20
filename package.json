@@ -91,6 +91,7 @@
   },
   "spec": {
     "post": [
+      "mv /usr/lib/matterhorn/pipeline/bake-scripts/apache/*.conf /etc/httpd/conf.d/"
       "mv /usr/lib/matterhorn/pipeline/bake-scripts /etc/bake-scripts/matterhorn"
     ],
     "executable": [
@@ -98,7 +99,7 @@
     ],
     "requires": [
       "cloudteam-td-agent-setup",
-      "cloud-httpd24-ssl-services-devs",
+      "cloud-httpd24-ssl-includes",
       "cosmos-ca-tools"
     ],
     "environment": {
