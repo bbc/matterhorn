@@ -60,6 +60,14 @@ docker-compose exec matterhorn npm run test:spec
 docker-compose exec matterhorn npm run test:integration
 ```
 
+## Updating the Pipeline Submodule
+
+Changes to the pipeline project (private) which configures hosting for Matterhorn are linked via a submodule. To update the reference to the submodule, run:
+
+```
+git submodule foreach git pull origin master
+```
+
 ### Releasing
 
 Currently the tests are run against each commit.
