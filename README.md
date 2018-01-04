@@ -1,15 +1,11 @@
 <h1 align="center">Project Matterhorn</h1>
 
 <p align="center">
-<b><a href="#overview">Overview</a></b>
-|
-<b><a href="#running">Running</a></b>
-|
-<b><a href="#testing">Testing</a></b>
-|
-<b><a href="#releasing">Releasing</a></b>
-|
-<b><a href="#useful-links">Useful Links</a></b>
+  <b><a href="#overview">Overview</a></b> |
+  <b><a href="#running">Running</a></b> |
+  <b><a href="#testing">Testing</a></b> |
+  <b><a href="#releasing">Releasing</a></b> |
+  <b><a href="#useful-links">Useful Links</a></b>
 </p>
 
 ## Overview
@@ -73,11 +69,22 @@ git submodule foreach git pull origin master
 Currently the tests are run against each commit.
 If you want to build to an environment you must first make a tag, before building to TEST and then LIVE in Jenkins.
 
-### Useful Links
+### Links
 
-* [melanite](https://github.com/bbc/melanite)
-* [device identification data](https://github.com/bbc/device-identification-data)
-* [TAL](https://github.com/bbc/tal)
+A table of useful links for the project.
+
+Type                       | Location
+-------------------------- | --------
+Status Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/status
+User Agent Endpoint        | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/ua/:ua/json
+WhoAmI Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/whoami/:whoami/json
+Build Job                  | https://jenkins.connected-tv.tools.bbc.co.uk/job/matterhorn-pipeline/
+Deploy Job                 | https://jenkins.connected-tv.tools.bbc.co.uk/job/matterhorn-deploy/
+Cosmos Service             | https://cosmos.tools.bbc.co.uk/services/matterhorn
+Melanite Library           | https://github.com/bbc/melanite
+Device Identification Data | https://github.com/bbc/device-identification-data
+TAL                        | https://github.com/bbc/tal
+
 
 ## License
 
