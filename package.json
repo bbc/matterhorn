@@ -21,7 +21,7 @@
     "start": "node server",
     "watch": "nodemon server.js",
     "pretest": "npm run lint:src && npm run lint:test",
-    "test": "npm run test:spec && npm run test:integration && npm run check-licenses",
+    "test": "npm run test:spec && npm run test:integration",
     "test:spec": "node test/runners/spec.js",
     "test:integration": "node test/runners/integration.js",
     "postversion": "git push origin master && git push --tags origin master",
