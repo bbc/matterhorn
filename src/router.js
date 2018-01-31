@@ -1,8 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const morgan = require('morgan')
-
-const logger = require('./common/logger')
 
 const userAgent = require('./device-identification/middleware/user-agent')
 const whoami = require('./device-identification/middleware/whoami')
@@ -13,7 +10,8 @@ const { name, version } = require('../package')
 const router = express.Router()
 
 router.use(cors())
-router.use(morgan('short', { stream: logger.stream }))
+// Enable access logging on below endpoints
+router.use(require('./common/middleware/access-log'))
 
 router.get('/status', (req, res) => {
   res.send('matterhorn is working fine')
