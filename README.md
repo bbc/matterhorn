@@ -58,7 +58,17 @@ docker-compose exec matterhorn npm run test:integration
 
 ## Updating the Pipeline Submodule
 
-Changes to the pipeline project (private) which configures hosting for Matterhorn are linked via a submodule. To update the reference to the submodule, run:
+Changes to the pipeline project (private) which configures hosting for Matterhorn are linked via a submodule.
+
+**NOTE**: you must ensure your local repo clone contains the submodule references - for instance, either explicitly ask for them when cloning:
+
+```git clone --recurse-submodules git@github.com:bbc/matterhorn.git```
+
+or configure Git to account for submodules by default:
+
+```git config --global submodule.recurse true```
+
+To update the reference to the submodule, run:
 
 ```
 git submodule foreach git pull origin master
