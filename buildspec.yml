@@ -20,4 +20,5 @@ phases:
   build:
     commands:
       - npm test
+      - ls -al pipeline/
       - npm run release
