@@ -31,6 +31,16 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to INT') {
+          steps {
+            build job: 'deploy',
+            parameters: [
+              string(name: 'VERSION_TAG', value: "$VERSION"),
+              string(name: 'ENVIRONMENT', value: "int")
+            ],
+            wait: false
+          }
+        }
     }
     post {
       changed {
