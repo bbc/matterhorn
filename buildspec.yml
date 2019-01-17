@@ -1,12 +1,23 @@
 version: 0.2
 
+env:
+  parameter-store:
+    "GITHUB_KEY": "/CodeBuild/Github-SSH-Key"
+    "GITHUB_HOST_KEY": "/CodeBuild/Github-Host-Key"
+    "GITHUB_API_TOKEN": "/CodeBuild/GitHub/AccessToken"
+    "CLIENT_CERT": "/CodeBuild/BBC-Client-Cert"
+    "CLIENT_KEY": "/CodeBuild/BBC-Client-Key"
+    "CA_CERT": "/CodeBuild/BBC-CA-Cert"
+
 phases:
-  pre_build:
+  install:
     commands:
-      - echo Pre build step ...
+      - configure_github
+      - configure_certs
+      - export CLIENT_CERT=/root/client.pem
+      - export CA_CERT=/root/ca.pem
+      - npm install
   build:
     commands:
-      - echo Build started on `date`
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - npm test
+      - npm run release
