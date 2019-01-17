@@ -27,7 +27,7 @@ Matterhorn is a device identification service for the TV Application Platform (T
 
 ```bash
 npm install
-./scripts/sandbox/devSetup.sh
+./devSetup.sh
 ```
 
 ### Testing
