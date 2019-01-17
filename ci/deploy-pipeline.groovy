@@ -1,6 +1,6 @@
 pipeline {
   parameters {
-    choice(choices: 'int\ntest\nlive', name: 'ENVIRONMENT', description: '')
+    choice(choices: 'test\nlive', name: 'ENVIRONMENT', description: '')
     string(name: 'OWNER', defaultValue: 'bad-horses', description: '')
     string(name: 'VERSION_TAG', description: 'The tag to deploy')
   }
