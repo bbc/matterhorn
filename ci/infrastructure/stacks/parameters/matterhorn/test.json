@@ -1,0 +1,7 @@
+{
+  "name_suffix": "matterhorn",
+  "aws_account_id": "219028824415",
+  "region": "eu-west-1",
+  "service_stack": false,
+  "parameters": {}
+}

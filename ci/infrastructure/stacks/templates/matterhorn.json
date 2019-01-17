@@ -1,0 +1,45 @@
+{
+  "Description": "CodeBuild project to build matterhorn",
+  "Resources": {
+    "Project": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Name": "matterhorn",
+        "Description": "",
+        "ServiceRole": {
+          "Fn::ImportValue": "test-itv-ci-jobs-iam-arn"
+        },
+        "Environment": {
+          "Type": "LINUX_CONTAINER",
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "219028824415.dkr.ecr.eu-west-1.amazonaws.com/node-image:latest"
+        },
+        "Source": {
+          "Location": "https://github.com/bbc/matterhorn.git",
+          "Type": "GITHUB",
+          "GitCloneDepth": 1,
+          "BuildSpec": "buildspec.yml",
+          "Auth": {
+            "Type": "OAUTH"
+          }
+        },
+        "Cache": {
+          "Location": {
+            "Fn::Sub": [
+              "${BucketName}/codebuild-cache/matterhorn",
+              {
+                "BucketName": {
+                  "Fn::ImportValue": "test-itv-ci-jobs-bucket-arn"
+                }
+              }]
+          },
+          "Type": "S3"
+        },
+        "TimeoutInMinutes": "5",
+        "Artifacts": {
+          "Type": "NO_ARTIFACTS"
+        }
+      }
+    }
+  }
+}

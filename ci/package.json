@@ -1,0 +1,14 @@
+{
+  "name": "matterhorn",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbc/matterhorn.git"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
+  }
+}
