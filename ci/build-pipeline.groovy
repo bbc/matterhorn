@@ -12,6 +12,20 @@ pipeline {
     }
     triggers { cron('@monthly') }
     stages {
+      stage('Determine the version') {
+          steps {
+            script {
+              VERSION = sh(returnStdout: true, script: "node -e \"console.log(require('./package.json').version)\"").trim()
+            }
+          }
+        }
+        stage("Set the build display name") {
+          steps {
+            script {
+              currentBuild.displayName = "$VERSION"
+            }
+          }
+        }
         stage('Prepare Codebuild') {
           steps {
             dir('ci') {
