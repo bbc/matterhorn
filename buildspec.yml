@@ -20,5 +20,6 @@ phases:
   build:
     commands:
       - npm test
+      - git submodule update --init --recursive
       - ls -al pipeline/
       - npm run release
