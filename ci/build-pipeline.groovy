@@ -50,7 +50,7 @@ pipeline {
             build job: 'deploy',
             parameters: [
               string(name: 'VERSION_TAG', value: "$VERSION"),
-              string(name: 'ENVIRONMENT', value: "int")
+              string(name: 'ENVIRONMENT', value: "test")
             ],
             wait: false
           }
