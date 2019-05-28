@@ -88,8 +88,8 @@ Type                       | Location
 Status Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/status
 User Agent Endpoint        | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/ua/:ua/json
 WhoAmI Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/whoami/:whoami/json
-Build Job                  | https://jenkins.connected-tv.tools.bbc.co.uk/job/matterhorn-pipeline/
-Deploy Job                 | https://jenkins.connected-tv.tools.bbc.co.uk/job/matterhorn-deploy/
+Build Job                  | https://ci.itv.tools.bbc.co.uk/job/launch/job/matterhorn/job/build/
+Deploy Job                 | https://ci.itv.tools.bbc.co.uk/job/launch/job/matterhorn/job/deploy/
 Cosmos Service             | https://cosmos.tools.bbc.co.uk/services/matterhorn
 Melanite Library           | https://github.com/bbc/melanite
 Device Identification Data | https://github.com/bbc/device-identification-data
