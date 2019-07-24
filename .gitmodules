@@ -1,3 +1,4 @@
 [submodule "pipeline"]
 	path = pipeline
 	url = ssh://git@github.com/bbc/matterhorn-pipeline.git
+	branch = wargames
