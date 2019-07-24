@@ -4,7 +4,7 @@ const updateIntervalMs = 5 * 60 * 1000 // 5 minutes in milliseconds
 let devices
 
 function makeRequest () {
-  return request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
+  return request.get('https://device-identification-data-wargame.s3.amazonaws.com/device-identification-data.json')
 }
 
 function updateDeviceData () {
