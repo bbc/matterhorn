@@ -124,7 +124,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "eslint": "^3.14.1",
+    "eslint": "^6.5.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-promise": "^3.4.0",
@@ -133,10 +133,10 @@
     "jasmine-spec-reporter": "^3.2.0",
     "nodemon": "^1.11.0",
     "npm-script-help": "^1.0.0",
+    "pre-push": "^0.1.1",
     "split-ca": "^1.0.1",
     "supertest": "^3.0.0",
-    "tvp-apache2-license-checker": "^1.0.1",
-    "pre-push": "^0.1.1"
+    "tvp-apache2-license-checker": "^1.0.1"
   },
   "optionalDependencies": {
     "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
