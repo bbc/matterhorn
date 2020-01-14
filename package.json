@@ -98,7 +98,6 @@
       "./pipeline/bake-scripts/*"
     ],
     "requires": [
-      "cloudteam-td-agent-setup",
       "cloud-httpd24-ssl-includes",
       "cosmos-ca-tools",
       "itv-component-monitoring"
