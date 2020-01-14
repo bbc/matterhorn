@@ -100,7 +100,8 @@
     "requires": [
       "cloudteam-td-agent-setup",
       "cloud-httpd24-ssl-includes",
-      "cosmos-ca-tools"
+      "cosmos-ca-tools",
+      "itv-component-monitoring"
     ],
     "environment": {
       "LOG_PATH": "/var/log/matterhorn",
