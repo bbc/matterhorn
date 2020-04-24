@@ -1,18 +1,38 @@
-const request = require('../../common/request-promise')
+const AWS = require('aws-sdk')
+
+const s3 = new AWS.S3({ region: 'eu-west-1' })
+
 const updateIntervalMs = 5 * 60 * 1000 // 5 minutes in milliseconds
 
 let devices
 
-function makeRequest () {
-  return request.get('https://connected-tv.files.bbci.co.uk/device-identification-data/data.json')
-}
+async function updateDeviceData () {
+  console.log('updating')
+  let testData = []
+  let liveData = []
 
-function updateDeviceData () {
-  return makeRequest()
-    .then(response => {
-      devices = response.body
-      return devices
-    })
+  try {
+    const data = await s3.getObject({
+      Bucket: 'test-device-identification-data-bucket-1u0gmv027tr5a',
+      Key: 'device-identification-data/data.json'
+    }).promise()
+    testData = JSON.parse(data.Body.toString('utf-8'))
+  } catch (_) { }
+
+  if (process.env.ENVIRONMENT !== 'local') {
+    try {
+      liveData = s3.getObject({
+        Bucket: 'live-device-identification-data-bucket-8wua42dtu3nc',
+        Key: 'device-identification-data/data.json'
+      }).promise()
+    } catch (_) { }
+  }
+
+  console.log('updated')
+  return {
+    test: testData,
+    live: liveData
+  }
 }
 
 function fetch () {
