@@ -16,7 +16,9 @@ async function updateDeviceData () {
       Key: 'device-identification-data/data.json'
     }).promise()
     testData = JSON.parse(data.Body.toString('utf-8'))
-  } catch (_) { }
+  } catch (ex) {
+    console.error('error fetching test data', ex)
+  }
 
   if (process.env.ENVIRONMENT !== 'local') {
     try {
@@ -24,7 +26,9 @@ async function updateDeviceData () {
         Bucket: 'live-device-identification-data-bucket-8wua42dtu3nc',
         Key: 'device-identification-data/data.json'
       }).promise()
-    } catch (_) { }
+    } catch (ex) {
+      console.error('error fetching live data', ex)
+    }
   }
 
   return {
