@@ -31,8 +31,8 @@
     "jenkins:create": "node pipeline/scripts/jenkins-create-job.js --name matterhorn --client-cert $CLIENT_CERT --ca-cert $CA_CERT",
     "sumo:log-deploy": "node pipeline/scripts/sumo-log-deployment.js --name matterhorn",
     "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name matterhorn --client-cert $COSMOS_CERT",
-    "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack matterhorn",
-    "cosmos:deploy": "cd pipeline; cosmos-deploy deploy matterhorn",
+    "cosmos:create-stack": "cd pipeline; npx cosmos-deploy create-stack matterhorn",
+    "cosmos:deploy": "cd pipeline; npx cosmos-deploy deploy matterhorn",
     "check-licenses": "tvp-apache2-license-checker",
     "help": "npm-help"
   },
@@ -137,9 +137,6 @@
     "split-ca": "^1.0.1",
     "supertest": "^3.0.0",
     "tvp-apache2-license-checker": "^1.0.1"
-  },
-  "optionalDependencies": {
-    "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
   },
   "pre-push": [
     "lint:src"
