@@ -7,7 +7,6 @@ const updateIntervalMs = 5 * 60 * 1000 // 5 minutes in milliseconds
 let devices
 
 async function updateDeviceData () {
-  console.log('updating')
   let testData = []
   let liveData = []
 
@@ -28,7 +27,6 @@ async function updateDeviceData () {
     } catch (_) { }
   }
 
-  console.log('updated')
   return {
     test: testData,
     live: liveData
