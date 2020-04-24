@@ -29,7 +29,6 @@ pipeline {
         stage('Prepare Codebuild') {
           steps {
             dir('ci') {
-                sh 'npm install'
                 sh 'npx cosmos-deploy provision-all-stacks itv-ci-jobs test 1 --tag BBCProject=interactive-tv-shared --tag BBCComponent=matterhorn --tag BBCEnvironment=tools --tag BBCOwner=bad-horses'
             }
           }

@@ -20,7 +20,6 @@ pipeline {
           currentBuild.description = "Git tag '${params.VERSION_TAG}' deployed to the ${params.ENVIRONMENT} environment."
         }
         dir('ci') {
-          sh 'npm install'
           sh "npx cosmos-deploy deploy matterhorn ${params.ENVIRONMENT} ${params.VERSION_TAG} -d ../pipeline"
         }
       }
