@@ -31,11 +31,12 @@
                 "BucketName": {
                   "Fn::ImportValue": "test-itv-ci-jobs-bucket-arn"
                 }
-              }]
+              }
+            ]
           },
           "Type": "S3"
         },
-        "TimeoutInMinutes": "5",
+        "TimeoutInMinutes": 5,
         "Artifacts": {
           "Type": "NO_ARTIFACTS"
         }
