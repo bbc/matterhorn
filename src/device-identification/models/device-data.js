@@ -22,7 +22,7 @@ async function updateDeviceData () {
 
   if (process.env.ENVIRONMENT !== 'local') {
     try {
-      const data = s3.getObject({
+      const data = await s3.getObject({
         Bucket: 'live-device-identification-data-bucket-8wua42dtu3nc',
         Key: 'device-identification-data/data.json'
       }).promise()
