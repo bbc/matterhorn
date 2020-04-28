@@ -25,7 +25,9 @@ function identifyDeviceByUserAgent (req, res) {
   deviceData
     .fetch()
     .then((devices) => {
-      return respond(req, res, devices)
+      const shouldUseTestData = process.env.ENVIRONMENT === 'local' || req.query.testMode
+      const data = shouldUseTestData ? devices.test : devices.live
+      return respond(req, res, data)
     })
     .catch((ex) => {
       logger.error(ex, decodeURIComponent(req.params.ua))

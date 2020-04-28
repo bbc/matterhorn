@@ -19,9 +19,8 @@
     "lint:src": "eslint src",
     "lint:test": "eslint test",
     "start": "node server",
-    "watch": "nodemon server.js",
-    "pretest": "npm run lint:src && npm run lint:test",
-    "test": "npm run test:spec && npm run test:integration",
+    "watch": "sh scripts/watch.sh",
+    "test": "sh scripts/test.sh",
     "test:spec": "node test/runners/spec.js",
     "test:integration": "node test/runners/integration.js",
     "postversion": "git push origin master && git push --tags origin master",
@@ -31,8 +30,8 @@
     "jenkins:create": "node pipeline/scripts/jenkins-create-job.js --name matterhorn --client-cert $CLIENT_CERT --ca-cert $CA_CERT",
     "sumo:log-deploy": "node pipeline/scripts/sumo-log-deployment.js --name matterhorn",
     "cosmos:create-component": "node pipeline/scripts/cosmos-create-component.js --name matterhorn --client-cert $COSMOS_CERT",
-    "cosmos:create-stack": "cd pipeline; cosmos-deploy create-stack matterhorn",
-    "cosmos:deploy": "cd pipeline; cosmos-deploy deploy matterhorn",
+    "cosmos:create-stack": "cd pipeline; npx cosmos-deploy create-stack matterhorn",
+    "cosmos:deploy": "cd pipeline; npx cosmos-deploy deploy matterhorn",
     "check-licenses": "tvp-apache2-license-checker",
     "help": "npm-help"
   },
@@ -111,6 +110,7 @@
   },
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.662.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "flashheart": "^2.6.0",
@@ -137,9 +137,6 @@
     "split-ca": "^1.0.1",
     "supertest": "^3.0.0",
     "tvp-apache2-license-checker": "^1.0.1"
-  },
-  "optionalDependencies": {
-    "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
   },
   "pre-push": [
     "lint:src"

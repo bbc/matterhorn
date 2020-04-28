@@ -22,3 +22,6 @@ SOURCES
 
 # License info
 licences.json
+
+# aws credentials
+credentials.json
