@@ -22,10 +22,11 @@ async function updateDeviceData () {
 
   if (process.env.ENVIRONMENT !== 'local') {
     try {
-      liveData = s3.getObject({
+      const data = s3.getObject({
         Bucket: 'live-device-identification-data-bucket-8wua42dtu3nc',
         Key: 'device-identification-data/data.json'
       }).promise()
+      liveData = JSON.parse(data.Body.toString('utf-8'))
     } catch (ex) {
       console.error('error fetching live data', ex)
     }
