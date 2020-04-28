@@ -16,7 +16,9 @@
           ]
         },
         "ManagedPolicyArns": [
-          "arn:aws:iam::979446310614:policy/CodeBuildBasePolicy"
+          {
+            "Fn::ImportValue": "test-itv-ci-jobs-iam-base-policy-arn"
+          }
         ],
         "Policies": [
           {
