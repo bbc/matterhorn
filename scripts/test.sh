@@ -2,6 +2,8 @@ set -e
 
 # if we're running in CodeBuild we don't use the wormhole
 if [ -z "$CODEBUILD_BUILD_ID" ]; then
+  echo "fetching credentials for local usage"
+
   curl \
     --silent \
     --cert $CLIENT_CERT \
