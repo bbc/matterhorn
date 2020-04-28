@@ -1,13 +1,50 @@
 {
   "Description": "CodeBuild project to build matterhorn",
   "Resources": {
+    "Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::979446310614:policy/CodeBuildBasePolicy"
+        ],
+        "Policies": [
+          {
+            "PolicyName": "matterhorn-codebuild-s3-access-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": {
+                "Action": [
+                  "s3:GetObject"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:s3:::test-device-identification-data-bucket-1u0gmv027tr5a/*"
+              }
+            }
+          }
+        ]
+      }
+    },
     "Project": {
       "Type": "AWS::CodeBuild::Project",
       "Properties": {
         "Name": "matterhorn",
         "Description": "",
         "ServiceRole": {
-          "Fn::ImportValue": "test-itv-ci-jobs-iam-arn"
+          "Fn::GetAtt": [
+            "Role",
+            "Arn"
+          ]
         },
         "Environment": {
           "Type": "LINUX_CONTAINER",
