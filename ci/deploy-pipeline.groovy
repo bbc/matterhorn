@@ -25,16 +25,4 @@ pipeline {
       }
     }
   }
-  post {
-    changed {
-      script {
-        if (currentBuild.currentResult == 'SUCCESS') {
-          slackSend channel: '#team-tv-bad-horse', color: 'good', message: "$JOB_NAME recovered - (<$BUILD_URL|Build>), (<$RUN_DISPLAY_URL|Pipeline>), (<https://github.com/bbc/matterhorn/tags/$VERSION_TAG|Commit>)"
-        }
-      }
-    }
-    failure {
-      slackSend channel: '#team-tv-bad-horse', color: 'danger', message: "$JOB_NAME failed - (<$BUILD_URL|Build>), (<$RUN_DISPLAY_URL|Pipeline>), (<https://github.com/bbc/matterhorn/tags/$VERSION_TAG|Commit>)"
-    }
-  }
 }

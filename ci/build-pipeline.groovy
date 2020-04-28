@@ -55,26 +55,4 @@ pipeline {
           }
         }
     }
-    post {
-      changed {
-        script {
-          if (currentBuild.currentResult == 'SUCCESS') {
-            slackSend channel: '#team-tv-bad-horse', color: 'good',
-                message:
-                    "$JOB_NAME recovered - (<$BUILD_URL|Build>), (<$RUN_DISPLAY_URL|Pipeline>), (<https://github.com/bbc/matterhorn/commit/$GIT_COMMIT|Commit>)"
-          }
-        }
-      }
-      failure {
-        slackSend channel: '#team-tv-bad-horse', color: 'danger',
-            message:
-                "$JOB_NAME failed - (<$BUILD_URL|Build>), (<$RUN_DISPLAY_URL|Pipeline>), (<https://github.com/bbc/matterhorn/commit/$GIT_COMMIT|Commit>)"
-      }
-      always {
-        sh 'echo "In always block.."' // a block cannot be empty
-        // Deal with artifacts here.
-        //sh "aws s3 cp s3://test-itv-ci-jobs/artifacts/$JOB_NAME/$BUILD_NUMBER results --recursive"
-        //sh "unzip results/artifacts.zip"
-      }
-    }
 }
