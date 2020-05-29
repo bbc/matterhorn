@@ -27,11 +27,14 @@ function identifyDeviceByWhoami (req, res, next) {
   }
 
   return whoamiModel.fetch()
-    .then((allDevices) => {
+    .then((devices) => {
+      const shouldUseTestData = process.env.ENVIRONMENT === 'local' || req.query.testMode
+      const data = shouldUseTestData ? devices.test : devices.live
+
       const matchPattern = item => new RegExp(item.who_am_i_pattern).test(whoami)
       const filterMatches = R.filter(matchPattern)
       const firstMatch = R.head
-      const device = R.compose(firstMatch, filterMatches)(allDevices)
+      const device = R.compose(firstMatch, filterMatches)(data)
       if (device) {
         deviceCache[whoami] = device
         return sendResponse(res, deviceCache[whoami])
