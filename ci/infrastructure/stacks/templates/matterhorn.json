@@ -30,7 +30,10 @@
                   "s3:GetObject"
                 ],
                 "Effect": "Allow",
-                "Resource": "arn:aws:s3:::test-device-identification-data-bucket-1u0gmv027tr5a/*"
+                "Resource": [
+                  "arn:aws:s3:::test-device-identification-data-bucket-1u0gmv027tr5a/*",
+                  "arn:aws:s3:::test-tvp-whoami-bucket-1npt44dhbyabk/*"
+                ]
               }
             }
           }
