@@ -31,7 +31,7 @@ describe('Identify', () => {
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
-          expect(res.headers['cache-control']).toEqual('public, max-age=300')
+          expect(res.headers['cache-control']).toEqual('public, max-age=900')
           done()
         })
     })
@@ -65,7 +65,7 @@ describe('Identify', () => {
         .end((err, res) => {
           if (err) throw err
           expect(res.status).toBe(200)
-          expect(res.headers['cache-control']).toEqual('public, max-age=300')
+          expect(res.headers['cache-control']).toEqual('public, max-age=900')
           done()
         })
     })
