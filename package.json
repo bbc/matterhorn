@@ -3,8 +3,8 @@
   "version": "0.36.1",
   "description": "matterhorn",
   "engines": {
-    "node": "6.10.0",
-    "npm": "3.10.10"
+    "node": ">16.0.0",
+    "npm": ">=8.1.2"
   },
   "repository": {
     "type": "git",

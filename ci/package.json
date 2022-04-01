@@ -9,6 +9,6 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "cosmos-deploy": "github:bbc/cosmos-deploy#v3"
+    "cosmos-deploy": "github:bbc/cosmos-deploy#v3.6.4-pre.1"
   }
 }

@@ -14,6 +14,7 @@ phases:
     commands:
       - configure_github
       - configure_certs
+      - load_node
       - export CLIENT_CERT=/root/client.pem
       - export CA_CERT=/root/ca.pem
       - npm install
