@@ -5,13 +5,17 @@ env:
     "GITHUB_KEY": "/CodeBuild/Github-SSH-Key"
     "GITHUB_HOST_KEY": "/CodeBuild/Github-Host-Key"
     "GITHUB_API_TOKEN": "/CodeBuild/GitHub/AccessToken"
-    "CLIENT_CERT": "/CodeBuild/BBC-Client-Cert"
-    "CLIENT_KEY": "/CodeBuild/BBC-Client-Key"
-    "CA_CERT": "/CodeBuild/BBC-CA-Cert"
+secrets-manager:
+    CLIENT_CERT_ENCODED: /CodeBuild/Certs/BBC_Production_Services_Client:Certificate
+    CLIENT_KEY_ENCODED: /CodeBuild/Certs/BBC_Production_Services_Client:PrivateKey
+    CA_CERT_ENCODED: /CodeBuild/Certs/Cloud_Services_Root_Trust:Certificate
 
 phases:
   install:
     commands:
+      - export CLIENT_CERT=$(echo "$CLIENT_CERT_ENCODED" | base64 --decode)
+      - export CLIENT_KEY=$(echo "$CLIENT_KEY_ENCODED" | base64 --decode)
+      - export CA_CERT=$(echo "$CA_CERT_ENCODED" | base64 --decode)
       - configure_github
       - configure_certs
       - load_node
