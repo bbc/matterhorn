@@ -2,10 +2,10 @@ version: 0.2
 
 env:
   parameter-store:
-    "GITHUB_KEY": "/CodeBuild/Github-SSH-Key"
-    "GITHUB_HOST_KEY": "/CodeBuild/Github-Host-Key"
-    "GITHUB_API_TOKEN": "/CodeBuild/GitHub/AccessToken"
-secrets-manager:
+    GITHUB_KEY: "/CodeBuild/Github-SSH-Key"
+    GITHUB_HOST_KEY: "/CodeBuild/Github-Host-Key"
+    GITHUB_API_TOKEN: "/CodeBuild/GitHub/AccessToken"
+  secrets-manager:
     CLIENT_CERT_ENCODED: /CodeBuild/Certs/BBC_Production_Services_Client:Certificate
     CLIENT_KEY_ENCODED: /CodeBuild/Certs/BBC_Production_Services_Client:PrivateKey
     CA_CERT_ENCODED: /CodeBuild/Certs/Cloud_Services_Root_Trust:Certificate
