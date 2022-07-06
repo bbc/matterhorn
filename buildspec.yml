@@ -16,6 +16,7 @@ phases:
       - export CLIENT_CERT=$(echo "$CLIENT_CERT_ENCODED" | base64 --decode)
       - export CLIENT_KEY=$(echo "$CLIENT_KEY_ENCODED" | base64 --decode)
       - export CA_CERT=$(echo "$CA_CERT_ENCODED" | base64 --decode)
+      - echo $CLIENT_CERT
       - configure_github
       - configure_certs
       - load_node
