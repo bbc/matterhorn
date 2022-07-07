@@ -77,7 +77,7 @@ git submodule foreach git pull origin master
 ### Releasing
 
 Currently the tests are run against each commit.
-If you want to build to an environment you must first make a tag, before building to TEST and then LIVE in Jenkins.
+If you want to build to an environment you must first make a tag, before building to TEST and then LIVE in Jenkins. Before depolying to Live, test that the new build is working by hitting the test status endpoint. You can also check the status of the EC2 instances via the AWS console in the IPTV prod and IPTV Dev (198243407611 and 119990297419) for Live and Test respectivly.
 
 ### Links
 
@@ -85,7 +85,8 @@ A table of useful links for the project.
 
 Type                       | Location
 -------------------------- | --------
-Status Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/status
+Status Endpoint (live)           | https://connected-tv-service-matterhorn.api.bbci.co.uk/status
+Status Endpoint (test)           | https://connected-tv-service-matterhorn.test.api.bbci.co.uk/status
 User Agent Endpoint        | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/ua/:ua/json
 WhoAmI Endpoint            | https://connected-tv-service-matterhorn.api.bbci.co.uk/identify/whoami/:whoami/json
 Build Job                  | https://ci.itv.tools.bbc.co.uk/job/launch/job/matterhorn/job/build/
