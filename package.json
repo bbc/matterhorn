@@ -105,8 +105,7 @@
       "LOG_PATH": "/var/log/matterhorn",
       "ENVIRONMENT": "{{environment}}",
       "CLIENT_CERT": "/etc/pki/tls/private/client_crt_key.pem",
-      "CA_CERT": "/etc/pki/tls/certs/client.crt",
-      "NPM_CONFIG_CACHE": "/usr/lib/matterhorn/.npm"
+      "CA_CERT": "/etc/pki/tls/certs/client.crt"
     }
   },
   "private": true,
