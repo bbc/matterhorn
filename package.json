@@ -1,6 +1,6 @@
 {
   "name": "matterhorn",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "matterhorn",
   "engines": {
     "node": ">16.0.0",
@@ -105,8 +105,7 @@
       "LOG_PATH": "/var/log/matterhorn",
       "ENVIRONMENT": "{{environment}}",
       "CLIENT_CERT": "/etc/pki/tls/private/client_crt_key.pem",
-      "CA_CERT": "/etc/pki/tls/certs/client.crt",
-      "NPM_CONFIG_CACHE": "/usr/lib/matterhorn/.npm"
+      "CA_CERT": "/etc/pki/tls/certs/client.crt"
     }
   },
   "private": true,
@@ -120,7 +119,7 @@
     "ramda": "^0.23.0",
     "request": "^2.79.0",
     "require-directory": "^2.1.1",
-    "speculate": "^1.6.1",
+    "speculate": "^3.1.2",
     "split": "^1.0.0",
     "winston": "^2.3.1"
   },
