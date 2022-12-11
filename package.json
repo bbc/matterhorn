@@ -112,7 +112,7 @@
   "dependencies": {
     "aws-sdk": "^2.814.0",
     "cors": "^2.8.1",
-    "express": "^4.14.1",
+    "express": "^4.17.3",
     "flashheart": "^2.6.0",
     "melanite": "1.1.0",
     "minimist": "^1.2.3",
