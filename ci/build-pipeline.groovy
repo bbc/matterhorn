@@ -1,6 +1,6 @@
 pipeline {
     parameters {
-      string(name: 'OWNER', defaultValue: 'bad-horses', description: '')
+      string(name: 'OWNER', defaultValue: 'sea-otter', description: '')
     }
     agent any
     tools {
@@ -29,7 +29,7 @@ pipeline {
         stage('Prepare Codebuild') {
           steps {
             dir('ci') {
-                sh 'npx cosmos-deploy provision-all-stacks itv-ci-jobs test 1 --tag BBCProject=interactive-tv-shared --tag BBCComponent=matterhorn --tag BBCEnvironment=tools --tag BBCOwner=bad-horses'
+                sh 'npx cosmos-deploy provision-all-stacks itv-ci-jobs test 1 --tag BBCProject=interactive-tv-shared --tag BBCComponent=matterhorn --tag BBCEnvironment=tools --tag BBCOwner=sea-otter'
             }
           }
         }

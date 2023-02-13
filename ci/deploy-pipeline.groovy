@@ -1,7 +1,7 @@
 pipeline {
   parameters {
     choice(choices: 'test\nlive', name: 'ENVIRONMENT', description: '')
-    string(name: 'OWNER', defaultValue: 'bad-horses', description: '')
+    string(name: 'OWNER', defaultValue: 'sea-otter', description: '')
     string(name: 'VERSION_TAG', description: 'The tag to deploy')
   }
   agent any
