@@ -131,7 +131,7 @@
     "eslint-plugin-standard": "^2.0.1",
     "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "^3.2.0",
-    "nodemon": "^1.11.0",
+    "nodemon": "^2.0.22",
     "npm-script-help": "^1.0.0",
     "pre-push": "^0.1.1",
     "split-ca": "^1.0.1",
