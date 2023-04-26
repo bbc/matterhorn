@@ -9,7 +9,7 @@ pipeline {
     nodejs 'LTS'
   }
   options {
-    timeout(time: 15, unit: 'MINUTES')
+    timeout(time: 25, unit: 'MINUTES')
     buildDiscarder(logRotator(numToKeepStr: '20'))
   }
   stages {
