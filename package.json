@@ -110,7 +110,7 @@
   },
   "private": true,
   "dependencies": {
-    "aws-sdk": "^2.814.0",
+    "aws-sdk": "^2.1365.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "flashheart": "^2.6.0",
