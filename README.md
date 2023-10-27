@@ -10,7 +10,9 @@
 
 ## Overview
 
-Matterhorn is a device identification service for the TV Application Platform (TAP).
+Matterhorn is a device identification service for legacy TVs that attempt to launch iPlayer on the "www.bbc.co.uk/iplayer" domain. For the details of the current usage of Matterhorn, please see [iPlayer Web Edge](https://github.com/bbc/iplayer-web-edge)
+
+This service was used as the identification service for all TV devices in the past but the newer devices on "www.live.bbctvapps.co.uk/*" domain use the [melanite](https://github.com/bbc/melanite) library directly via [Tap Launch Edge](https://github.com/bbc/tap-launch-edge). 
 
 ## Certs
 
