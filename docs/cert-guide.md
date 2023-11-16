@@ -33,3 +33,6 @@
     - Upload the .crt and .csr files too. These don’t need to be encrypted.
 13. Delete all copies of certs, CSR and private keys from local machines.
 14. Done 🙂
+
+If you need to restore from backup certificates; please see the following guide [here](https://github.com/bbc/tv-docs/blob/main/tv-client-build-and-launch/certificate-renewal-and-decommissioning.md#guidance-for-using-backup-certificates).
+
