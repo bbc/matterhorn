@@ -21,13 +21,15 @@
 
     Or you can encode the certs on your laptop and overwrite the values in the Cosmos console (e.g. [matterhorn test env](https://cosmos.tools.bbc.co.uk/services/matterhorn/test/configuration)) manually.
 
-10. Test the update. ([LIVE](https://connected-tv-service-matterhorn.api.bbci.co.uk/status) and [TEST](https://connected-tv-service-matterhorn.test.api.bbci.co.uk/status))
-11. Replace the certificate, CSR and private key for [TEST](https://s3.console.aws.amazon.com/s3/buckets/test-tv-cert-store?region=eu-west-1&prefix=connected-tv-service-matterhorn.test.api.bbci.co.uk/&showversions=false) and [LIVE](https://s3.console.aws.amazon.com/s3/buckets/live-tv-cert-store?region=eu-west-1&prefix=connected-tv-service-matterhorn.api.bbci.co.uk/&showversions=false) in the tv-cert-store bucket
+    Ensure you deploy the configuration after this.
+
+11. Test the update. ([LIVE](https://connected-tv-service-matterhorn.api.bbci.co.uk/status) and [TEST](https://connected-tv-service-matterhorn.test.api.bbci.co.uk/status))
+12. Replace the certificate, CSR and private key for [TEST](https://s3.console.aws.amazon.com/s3/buckets/test-tv-cert-store?region=eu-west-1&prefix=connected-tv-service-matterhorn.test.api.bbci.co.uk/&showversions=false) and [LIVE](https://s3.console.aws.amazon.com/s3/buckets/live-tv-cert-store?region=eu-west-1&prefix=connected-tv-service-matterhorn.api.bbci.co.uk/&showversions=false) in the tv-cert-store bucket
     - The private key needs to be encrypted with the tv-cert-store key. LIVE and TEST have separate tv-cert-store keys that are managed by aws kms. You need the [`tv-cert-store-key-policy`](https://github.com/bbc/aws-access/blob/main/accounts/iptv-dev.yml#L18) attached to your aws role (LIVE and TEST) for both accounts in order to use the key.
     - Get/configure the `aws` and `aws-encryption-cli` cli tools.
     - Get the keys arn `aws kms list-aliases`.
     - Encrypt the .key file `aws-encryption-cli --encrypt -S --input <path-to-private-key> --wrapping-keys "key=<AliasArn-from-above>" --output ./<path-to-private-key>.enc`
     - Upload to the s3 bucket `aws s3 cp <path-to-private-key>.enc <path-to-store-encrypted-key-in-s3> --sse` (this can also be done via the console if you have the `AdministratorAccessRequiringMFA` policy)
     - Upload the .crt and .csr files too. These don’t need to be encrypted.
-12. Delete all copies of certs, CSR and private keys from local machines.
-13. Done 🙂
+13. Delete all copies of certs, CSR and private keys from local machines.
+14. Done 🙂
